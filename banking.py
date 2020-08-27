@@ -3,14 +3,6 @@ from string import digits
 import sqlite3 as sq
 
 
-class Cards:
-    id = 0
-    cards = []
-
-    def __init__(self):
-        pass
-
-
 class BankSystem:
     prompt1 = '1. Create an account\n2. Log into account\n0. Exit\n'
     prompt2 = '1. Balance\n2. Add income\n3. Do transfer\n4. Close account\n5. Log out\n0. Exit\n'
@@ -143,8 +135,8 @@ class BankSystem:
         card_input = input('Enter card number:\n')
         if self.check_transfer(card_input) is True:
             amount = int(input('Enter how much money you want to transfer:\n'))
-            self.check_transfer_balance(amount)
-            self.make_transaction(card_input, amount)
+            if self.check_transfer_balance(amount) is True:
+                self.make_transaction(card_input, amount)
 
     def check_transfer(self, number):
         if self.verify_card(number) is True:
